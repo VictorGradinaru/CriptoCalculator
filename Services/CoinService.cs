@@ -60,7 +60,7 @@ namespace CriptoCalculator.Services
     
             var coins = JsonSerializer.Deserialize<List<Coin>>(jsonResponse, options);
 
-            return coins?.Take(1000).ToList() ?? new List<Coin>();
+            return coins?.Take(2000).ToList() ?? new List<Coin>();
         }
     }
 
