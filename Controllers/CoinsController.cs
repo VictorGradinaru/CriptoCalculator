@@ -16,11 +16,20 @@ namespace CriptoCalculator.Controllers
             _coinService = coinService;
         }
 
-        // GET: api/coins/price
+        
         [HttpGet("GetCoinPriceHistoryOnDate")]
         public async Task<IActionResult> GetCoinPrice(string name, string currency, string date)
         {
             var result = await _coinService.GetCoinPriceAsync(name, currency, date);
+
+            return Ok(result);
+        }
+
+        
+        [HttpGet("GetCoinsList")]
+        public async Task<IActionResult> GetCoinsList()
+        {
+            var result = await _coinService.GetCoinsListAsync();
 
             return Ok(result);
         }

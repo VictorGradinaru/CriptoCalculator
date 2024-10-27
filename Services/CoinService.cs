@@ -44,6 +44,24 @@ namespace CriptoCalculator.Services
 
             return null;
         }
+
+        public async Task<List<Coin>> GetCoinsListAsync()
+        {
+            var response = await _httpClient.GetAsync("https://api.coingecko.com/api/v3/coins/list");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<Coin>();
+            }
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+    
+            var coins = JsonSerializer.Deserialize<List<Coin>>(jsonResponse, options);
+
+            return coins?.Take(1000).ToList() ?? new List<Coin>();
+        }
     }
 
     public class CoinGeckoResponse
