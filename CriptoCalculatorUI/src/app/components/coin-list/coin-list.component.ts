@@ -12,8 +12,8 @@ export class CoinListComponent implements OnInit {
   selectedCurrency: string = ''; 
 
   selectedDate: string | null = null; 
-  isValidDate: boolean = true; 
-  coinPriceHistory: string | null = null;
+  simulatedAmount: string | null = null;
+  montlyInvestmentAmount: number = 0;
 
   constructor(private coinService: CoinService) {}
 
@@ -33,28 +33,18 @@ export class CoinListComponent implements OnInit {
   }
 
   onDateChange(event: any): void {
-    const selectedDay = event.value.getDate(); 
+    const day = String(event.value.getDate()).padStart(2, '0'); 
+    const month = String(event.value.getMonth() + 1).padStart(2, '0'); 
+    const year = event.value.getFullYear(); 
+    this.selectedDate = `${day}-${month}-${year}`;
+}
 
-    // Verifică dacă ziua este 15
-    this.isValidDate = selectedDay === 15;
-
-    if (this.isValidDate) {
-      const day = String(event.value.getDate()).padStart(2, '0'); 
-      const month = String(event.value.getMonth() + 1).padStart(2, '0'); 
-      const year = event.value.getFullYear(); 
-      // Formatează data în formatul DD-MM-YYYY
-      this.selectedDate = `${day}-${month}-${year}`;
-    } else {
-      this.selectedDate = null; 
-    }
-  }
-
-  fetchCoinPriceHistory(): void {
+  GetInvestmentDCA(): void {
     if (this.selectedCoin && this.selectedCurrency && this.selectedDate) {
-      this.coinService.getCoinPriceHistoryOnDate(this.selectedCoin, this.selectedCurrency, this.selectedDate)
+      this.coinService.getInvestmentDcaByStartDate(this.selectedCoin, this.selectedCurrency, this.selectedDate, this.montlyInvestmentAmount)
         .subscribe(
-          (priceHistory) => {
-            this.coinPriceHistory = priceHistory; 
+          (retreiveValue) => {
+            this.simulatedAmount = retreiveValue; 
           },
           (error) => {
             console.error('Eroare la obținerea istoricului prețului', error);

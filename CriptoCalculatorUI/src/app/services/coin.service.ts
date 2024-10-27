@@ -20,17 +20,15 @@ export class CoinService {
     return this.http.get<Coin[]>(`${this.baseUrl}/GetCoinsList`);
   }
 
-  getCoinPriceHistoryOnDate(name: string, currency: string, date: string): Observable<string> {
-    const url = `${this.baseUrl}/GetCoinPriceHistoryOnDate`;
+  getInvestmentDcaByStartDate(name: string, currency: string, date: string, montlyinvestmentamount: number): Observable<string> {
+    const url = `${this.baseUrl}/GetSimulatedDCAbyDate`;
 
     let params = new HttpParams()
       .set('name', name)
       .set('currency', currency)
-      .set('date', date);
+      .set('startDate', date)
+      .set('montlyinvestmentamount', montlyinvestmentamount);
 
-    
-    return this.http.get<{ price: number }>(url, { params }).pipe(
-      map(response => response.price.toString())
-    );
+    return this.http.get<string>(url, { params });
   }
 }

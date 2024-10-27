@@ -22,7 +22,10 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <p *ngIf="!isValidDate">Vă rugăm să selectați data de 15 a lunii.</p>
+</div>
+<div>
+    <label for="investment-amount">Investing amount:</label>
+    <input type="number" id="investment-amount" [(ngModel)]="montlyInvestmentAmount" min="0" step="1" placeholder="Enter amount">
 </div>
  
 <br>
@@ -34,10 +37,9 @@
 <br>
 <br>
 <div>
-    <button (click)="fetchCoinPriceHistory()">Get Coin Price History</button>
+    <p>Get investment DCA by investing monthly  {{ montlyInvestmentAmount }} {{ selectedCurrency | uppercase }} starting from the selected date.<br> 
+        The asset price on the 15th of each month is used as the reference value.</p>
+    <button (click)="GetInvestmentDCA()">Calculate</button>
 </div>
   
-<div>
-    <label>Coin Price History:</label>
-    <input type="text" [value]="coinPriceHistory" readonly />
-</div>
+<p>{{simulatedAmount}} </p>
