@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
 export interface Coin {
   id: string;
@@ -12,11 +12,25 @@ export interface Coin {
   providedIn: 'root',
 })
 export class CoinService {
-  private apiUrl = 'https://localhost:7081/api/Coins/GetCoinsList'; // URL-ul API-ului
+  private baseUrl = 'https://localhost:7081/api/Coins';
 
   constructor(private http: HttpClient) {}
 
   getCoinsList(): Observable<Coin[]> {
-    return this.http.get<Coin[]>(this.apiUrl); // Facem un GET la API
+    return this.http.get<Coin[]>(`${this.baseUrl}/GetCoinsList`);
+  }
+
+  getCoinPriceHistoryOnDate(name: string, currency: string, date: string): Observable<string> {
+    const url = `${this.baseUrl}/GetCoinPriceHistoryOnDate`;
+
+    let params = new HttpParams()
+      .set('name', name)
+      .set('currency', currency)
+      .set('date', date);
+
+    
+    return this.http.get<{ price: number }>(url, { params }).pipe(
+      map(response => response.price.toString())
+    );
   }
 }

@@ -1,7 +1,7 @@
 <div>
     <label for="coin-select">Select coin:</label>
     <select id="coin-select" [(ngModel)]="selectedCoin">
-      <option *ngFor="let coin of coins" [value]="coin.symbol">{{ coin.name }}</option>
+      <option *ngFor="let coin of coins" [value]="coin.id">{{ coin.name }}</option>
     </select>
 </div>
 
@@ -30,4 +30,14 @@
 <p>Selected coin: {{ selectedCoin }}</p>
 <p>Selected currency: {{ selectedCurrency }}</p>
 <p>Selected date: {{ selectedDate }}</p>
+
+<br>
+<br>
+<div>
+    <button (click)="fetchCoinPriceHistory()">Get Coin Price History</button>
+</div>
   
+<div>
+    <label>Coin Price History:</label>
+    <input type="text" [value]="coinPriceHistory" readonly />
+</div>
