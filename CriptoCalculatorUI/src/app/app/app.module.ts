@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { CoinListComponent } from '../components/coin-list/coin-list.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -11,9 +12,11 @@ import { CoinListComponent } from '../components/coin-list/coin-list.component';
   ],
   imports: [
     BrowserModule,
-    CommonModule // Adaugă CommonModule aici
+    CommonModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient() // Add this line to provide HttpClient
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
