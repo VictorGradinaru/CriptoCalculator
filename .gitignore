@@ -1,0 +1,64 @@
+# Fișiere generate de Visual Studio
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Fișiere și directoare de build
+bin/
+obj/
+TestResults/
+
+# Fișiere de configurare temporare
+*.local.json
+*.Local.*
+*.vsconfig
+
+# Fișiere temporare și de log
+*.log
+*.tlog
+*.idb
+*.pdb
+*.cache
+*.mdb
+*.ilk
+
+# Fișiere pentru packagere (NuGet, npm, Yarn)
+*.nupkg
+*.snupkg
+node_modules/
+yarn.lock
+package-lock.json
+
+# Fișiere de configurare ale sistemului
+.idea/
+.DS_Store
+Thumbs.db
+
+# Fișiere generate de dotnet și pachete
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Fișierele de configurare utilizate de Docker (opțional, doar dacă folosești containere)
+docker-compose.override.yml
+Dockerfile*
+
+# Configurări specifice platformelor cloud
+*.PublishProfiles/
+
+# Chei secrete și fișiere de configurare sensibile
+appsettings.Development.json
+appsettings.local.json
+secrets.json
+*.secret
+.env
+
+# Logs și fișiere temporare ale sistemului
+*.pid
+*.pid.lock
+*.swp
+*.bak
+*.tmp

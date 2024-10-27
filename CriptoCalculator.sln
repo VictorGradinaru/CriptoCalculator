@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriptoCalculator", "CriptoCalculator.csproj", "{EE51DAE6-8ABF-4AAF-8539-40DDCC9B3BFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE51DAE6-8ABF-4AAF-8539-40DDCC9B3BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE51DAE6-8ABF-4AAF-8539-40DDCC9B3BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE51DAE6-8ABF-4AAF-8539-40DDCC9B3BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE51DAE6-8ABF-4AAF-8539-40DDCC9B3BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {247F71A6-944B-48F5-BD47-7EA0511ABF27}
+	EndGlobalSection
+EndGlobal
