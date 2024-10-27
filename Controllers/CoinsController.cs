@@ -31,6 +31,7 @@ namespace CriptoCalculator.Controllers
         public async Task<IActionResult> GetSimulatedDCA(string name, string currency, string startDate, int montlyinvestmentamount)
         {
             decimal totalCoinsInInterval=0;
+            string message;
             if (!DateTime.TryParseExact(startDate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var start))
             {
                 return BadRequest("Wrong date format. correct: (dd-MM-yyyy).");
@@ -42,27 +43,33 @@ namespace CriptoCalculator.Controllers
 
             // Verifică dacă ziua de început este mai mare de 15; dacă da, începe de la luna următoare
             var initialDate = start.Day <= 15 ? new DateTime(start.Year, start.Month, 15) : new DateTime(start.Year, start.Month, 15).AddMonths(1);
-
-            for (var date = initialDate; date <= currentDate; date = date.AddMonths(1))
+            try
             {
-                var formattedDate = date.ToString("dd-MM-yyyy");
-                var result = await _coinService.GetCoinPriceAsync(name, currency, formattedDate);
-
-                if (result != null)
+                for (var date = initialDate; date <= currentDate; date = date.AddMonths(1))
                 {
-                    montlyCoinPrices.Add(result);
+                    var formattedDate = date.ToString("dd-MM-yyyy");
+                    var result = await _coinService.GetCoinPriceAsync(name, currency, formattedDate);
+
+                    if (result != null)
+                    {
+                        montlyCoinPrices.Add(result);
+                    }
                 }
-            }
 
-            foreach (var v in montlyCoinPrices)
+                foreach (var v in montlyCoinPrices)
+                {
+                    totalCoinsInInterval += montlyinvestmentamount / v.Price;
+                }
+
+                var todayCoinPrice = await _coinService.GetCoinPriceAsync(name, currency, currentDate.AddDays(-5).ToString("dd-MM-yyyy"));
+                message = $"Total investment in {montlyCoinPrices.Count} months: {montlyCoinPrices.Count * montlyinvestmentamount}; Current value: {totalCoinsInInterval * todayCoinPrice.Price}";
+            }
+            catch (Exception ex) 
             {
-                totalCoinsInInterval += montlyinvestmentamount / v.Price;
+                message = "data missing for selected coin in selected interval";
             }
 
-            var todayCoinPrice = await _coinService.GetCoinPriceAsync(name, currency, currentDate.AddDays(-5).ToString("dd-MM-yyyy"));
-
-            //return Ok(new { message = $"Total investment in {montlyCoinPrices.Count} months: {montlyCoinPrices.Count * montlyinvestmentamount}; Current value: {totalCoinsInInterval * todayCoinPrice.Price}" });
-            return Ok((totalCoinsInInterval * todayCoinPrice.Price).ToString());
+            return Ok(new { message = message });
         }
 
 

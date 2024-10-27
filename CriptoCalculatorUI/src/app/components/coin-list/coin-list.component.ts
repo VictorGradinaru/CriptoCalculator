@@ -43,8 +43,8 @@ export class CoinListComponent implements OnInit {
     if (this.selectedCoin && this.selectedCurrency && this.selectedDate) {
       this.coinService.getInvestmentDcaByStartDate(this.selectedCoin, this.selectedCurrency, this.selectedDate, this.montlyInvestmentAmount)
         .subscribe(
-          (retreiveValue) => {
-            this.simulatedAmount = retreiveValue; 
+          (response) => {
+            this.simulatedAmount = response.message; 
           },
           (error) => {
             console.error('Eroare la obținerea istoricului prețului', error);

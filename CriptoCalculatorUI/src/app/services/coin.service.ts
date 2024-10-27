@@ -20,7 +20,7 @@ export class CoinService {
     return this.http.get<Coin[]>(`${this.baseUrl}/GetCoinsList`);
   }
 
-  getInvestmentDcaByStartDate(name: string, currency: string, date: string, montlyinvestmentamount: number): Observable<string> {
+  getInvestmentDcaByStartDate(name: string, currency: string, date: string, montlyinvestmentamount: number): Observable<{ message: string }> {
     const url = `${this.baseUrl}/GetSimulatedDCAbyDate`;
 
     let params = new HttpParams()
@@ -29,6 +29,6 @@ export class CoinService {
       .set('startDate', date)
       .set('montlyinvestmentamount', montlyinvestmentamount);
 
-    return this.http.get<string>(url, { params });
+      return this.http.get<{ message: string }>(url, { params });
   }
 }
