@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { CoinListComponent } from '../components/coin-list/coin-list.component';
 import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { provideHttpClient } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    CommonModule
+    CommonModule,
+    FormsModule 
   ],
   providers: [
     provideHttpClient() // Add this line to provide HttpClient

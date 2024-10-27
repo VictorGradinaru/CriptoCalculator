@@ -8,22 +8,21 @@ import { Coin, CoinService } from '../../services/coin.service';
 })
 export class CoinListComponent implements OnInit {
   coins: Coin[] = []; 
-  coinsText: string = ''; 
+  selectedCoin: string = ''; // Variabilă pentru a stoca coinul selectat
 
   constructor(private coinService: CoinService) {}
 
   ngOnInit(): void {
-    this.loadCoins();
+    this.getCoins();
   }
 
-  loadCoins(): void {
+  getCoins(): void {
     this.coinService.getCoinsList().subscribe(
-      (data: Coin[]) => {
-        this.coins = data;
-        this.coinsText = this.coins.map(coin => `${coin.name} (${coin.symbol})`).join('\n');
+      (data) => {
+        this.coins = data; // Populează lista de coinuri
       },
-      (error: any) => {
-        console.error('Error fetching coin list:', error);
+      (error) => {
+        console.error('Eroare la obținerea coinurilor', error);
       }
     );
   }

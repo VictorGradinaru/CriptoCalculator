@@ -1,2 +1,10 @@
-<h2>Coin List</h2>
-<textarea rows="10" cols="30" readonly>{{ coinsText }}</textarea>
+<div>
+    <label for="coin-select">Selectați un coin:</label>
+    <select id="coin-select" [(ngModel)]="selectedCoin">
+      <option *ngFor="let coin of coins" [value]="coin.symbol">{{ coin.name }}</option>
+    </select>
+  </div>
+  
+  <!-- Afișează coinul selectat (opțional) -->
+  <p>Coinul selectat: {{ selectedCoin }}</p>
+  
